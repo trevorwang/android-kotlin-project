@@ -1,5 +1,6 @@
-package mingsin.andoridkotlin
+package mingsin.andoridkotlin.data
 
+import mingsin.andoridkotlin.model.Ip
 import retrofit2.http.GET
 import rx.Observable
 
@@ -9,5 +10,5 @@ import rx.Observable
 interface ApiService {
 
     @GET("ip")
-    fun getIp():Observable<Ip>
+    fun getIp(): Observable<Ip>
 }

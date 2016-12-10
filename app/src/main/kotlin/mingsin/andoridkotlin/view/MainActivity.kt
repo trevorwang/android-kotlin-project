@@ -1,26 +1,25 @@
-package mingsin.andoridkotlin
+package mingsin.andoridkotlin.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.orhanobut.logger.Logger
+import mingsin.andoridkotlin.R
+import mingsin.andoridkotlin.data.ApiService
 import mingsin.andoridkotlin.databinding.ActivityMainBinding
+import mingsin.andoridkotlin.viewmodel.MainViewModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
-    var activityComponent: ActivityComponent? = null
-    @Inject lateinit var mRestApi: RestApi
-
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        binding.hello = "Google Hello!!!"
-        activityComponent = DaggerActivityComponent.builder().activityModule(ActivityModule(this)).build()
-        activityComponent?.inject(this)
-
+        MainViewModel(binding).onCreate()
         val apiService = mRestApi.createRetrofit().create(ApiService::class.java)
+        requestIp(apiService)
+    }
+
+    private fun requestIp(apiService: ApiService) {
         apiService.getIp()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,9 +30,8 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        activityComponent = null
+    override fun onInject() {
+         activityComponent.inject(this)
     }
 
     override fun onResume() {

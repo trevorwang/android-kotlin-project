@@ -1,8 +1,9 @@
-package mingsin.andoridkotlin
+package mingsin.andoridkotlin.di
 
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import mingsin.andoridkotlin.App
 import javax.inject.Singleton
 
 /**

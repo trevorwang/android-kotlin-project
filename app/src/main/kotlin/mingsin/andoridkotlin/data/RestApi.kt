@@ -1,4 +1,4 @@
-package mingsin.andoridkotlin
+package mingsin.andoridkotlin.data
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
