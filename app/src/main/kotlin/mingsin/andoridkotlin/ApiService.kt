@@ -9,5 +9,5 @@ import rx.Observable
 interface ApiService {
 
     @GET("ip")
-    fun getIp():Observable<String>
+    fun getIp():Observable<Ip>
 }
