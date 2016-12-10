@@ -13,17 +13,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        binding.tvHello.text = "Google Hello world!!!!!"
-
+        binding.hello = "Google Hello!!!"
         val apiService = RestApi().createRetrofit().create(ApiService::class.java)
         apiService.getIp()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
+                .subscribe({ //onNext
                     Logger.i(it)
-                }) {
+                }) { // onError
                     Logger.e(it, it.message)
                 }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+
+    }
 }
