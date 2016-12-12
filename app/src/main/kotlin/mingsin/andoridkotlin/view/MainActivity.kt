@@ -9,12 +9,16 @@ import mingsin.andoridkotlin.databinding.ActivityMainBinding
 import mingsin.andoridkotlin.viewmodel.MainViewModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
+    @Inject lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        MainViewModel(binding).onCreate()
+        binding.hello = mainViewModel
+        mainViewModel.input.set("Google!!!")
+
         val apiService = mRestApi.createRetrofit().create(ApiService::class.java)
         requestIp(apiService)
     }
@@ -31,7 +35,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onInject() {
-         activityComponent.inject(this)
+        activityComponent.inject(this)
     }
 
     override fun onResume() {
