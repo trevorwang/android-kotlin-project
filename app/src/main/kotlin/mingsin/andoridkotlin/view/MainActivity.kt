@@ -17,8 +17,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.hello = mainViewModel
-        mainViewModel.input.set("Google!!!")
-
+        mainViewModel.text.value = "Google Searcher!!"
         val apiService = mRestApi.createRetrofit().create(ApiService::class.java)
         requestIp(apiService)
     }

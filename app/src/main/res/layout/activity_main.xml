@@ -10,40 +10,34 @@
             type="mingsin.andoridkotlin.viewmodel.MainViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/activity_main"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="mingsin.andoridkotlin.view.MainActivity">
 
         <EditText
             android:id="@+id/et_hello"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:afterTextChanged="@{hello.textChange}"
-            app:binding="@{hello.text}"
-            tools:layout_editor_absoluteX="182dp"
-            tools:layout_editor_absoluteY="234dp" />
+            app:binding="@{hello.text}" />
 
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="56dp"
             android:onClick="@{hello.onClick}"
-            android:text="Submit"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_hello" />
+            android:text="Submit" />
 
         <TextView
-            android:layout_width="368dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@{hello.text}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_submit"
-            tools:layout_editor_absoluteX="8dp" />
-    </android.support.constraint.ConstraintLayout>
+            android:text="@{hello.text}" />
+    </LinearLayout>
 </layout>
