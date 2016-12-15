@@ -12,7 +12,16 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(val context: Context) : ViewModel<String>() {
     val text = BindableString()
     val onClick = View.OnClickListener { v ->
-        Toast.makeText(context, text.value, Toast.LENGTH_SHORT).show()
+        context.toast(text.value)
     }
     val textChange = TextViewBindingAdapter.AfterTextChanged { println(it.toString()) }
+}
+
+
+fun Context.toast(message: String, time: Int) {
+    Toast.makeText(this, message, time).show()
+}
+
+fun Context.toast(message: String) {
+    toast(message, Toast.LENGTH_SHORT)
 }
